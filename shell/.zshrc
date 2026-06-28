@@ -28,6 +28,10 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*:(ssh|scp|sftp):*' hosts $(grep -E '^Host ' ~/.ssh/config | grep -v '\*' | awk '{print $2}')
 
 # Autocomplete (registers precmd/chpwd hooks — must load before zoxide)
+# Catppuccin Overlay0 (#6c7086) so suggestions are visible against the dark bg;
+# default fg=8 blends into the background. Suggest from history then completions.
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6c7086'
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # syntax highlighting (registers chpwd hooks — must load before zoxide)
