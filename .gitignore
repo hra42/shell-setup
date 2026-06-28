@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+
+# Local Claude Code session state (not part of the setup)
+.claude/
+
+# Backup/restore artifacts the installer creates in $HOME (defensive — they live outside the repo)
+.shell-setup-backup-*/
+
+# Secrets — safety net even though we don't intentionally copy any
+.env
+.env.*
+*.pem
+*.key
+*.token
+id_rsa
+id_ed25519
+id_ecdsa
+*.p12
+*.pfx
+
+# Editor cruft
+*.swp
+*~
+.idea/
+.vscode/
+
+# Tool caches that may appear under configs/ if you copy too aggressively
+configs/micro/backups/
+configs/micro/buffers/
+
+# Zed local AI-prompt database (LMDB) — local state, not config
+configs/zed/prompts/

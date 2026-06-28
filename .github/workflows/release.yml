@@ -1,0 +1,36 @@
+name: release
+
+# Publishes scripts/install.sh as `install.sh` on the GitHub release, so
+# install-proxy can serve it from releases/latest/download/install.sh.
+# Mirrors the hra42/deployer release pattern (this repo ships no binary, so the
+# script is the only asset).
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stage install script
+        run: |
+          mkdir -p dist
+          cp scripts/install.sh dist/install.sh
+
+      - name: Verify install script is valid sh
+        run: sh -n dist/install.sh
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/install.sh
+          generate_release_notes: true
