@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# Bootstrap the hra42 macOS shell setup from a single command.
+# Bootstrap the hra42 shell setup from a single command (macOS or Debian/Ubuntu Linux).
 #
 # Usage:
 #   curl -fsSL https://shell-setup.hra42.lol/install | sh
@@ -26,11 +26,14 @@ err()  { printf 'error: %s\n' "$*" >&2; exit 1; }
 info() { printf '==> %s\n' "$*"; }
 need() { command -v "$1" >/dev/null 2>&1 || err "missing required command: $1"; }
 
-need git
+command -v git >/dev/null 2>&1 || err "missing required command: git (install it first, e.g. 'sudo apt install git')"
 
-# macOS only — the repo installs Homebrew, casks, and macOS-specific config.
+# macOS (Homebrew + casks) or Debian/Ubuntu Linux (apt + fallback installers).
 os_raw="$(uname -s)"
-[ "$os_raw" = "Darwin" ] || err "this setup targets macOS (Darwin); detected: $os_raw"
+case "$os_raw" in
+  Darwin|Linux) ;;
+  *) err "this setup targets macOS (Darwin) or Linux; detected: $os_raw" ;;
+esac
 
 # Clone fresh, or update an existing checkout in place (idempotent).
 if [ -d "$TARGET_DIR/.git" ]; then
