@@ -373,6 +373,12 @@ backup "$HOME/.claude/agents"
 rm -rf "$HOME/.claude/agents"
 mkdir -p "$HOME/.claude/agents"
 cp "$REPO_DIR"/configs/claude/agents/*.md "$HOME/.claude/agents/"
+backup "$HOME/.claude/subagent-statusline.sh"
+cp "$REPO_DIR/configs/claude/subagent-statusline.sh" "$HOME/.claude/subagent-statusline.sh"
+chmod +x "$HOME/.claude/subagent-statusline.sh"
+mkdir -p "$HOME/.claude/themes"
+backup "$HOME/.claude/themes/catppuccin-mocha.json"
+cp "$REPO_DIR/configs/claude/themes/catppuccin-mocha.json" "$HOME/.claude/themes/"
 
 # 6a. Ghostty config (macOS only — GUI terminal, lives under ~/Library/...).
 # Skipped on Linux (CLI-only scope).
@@ -382,6 +388,24 @@ if [[ "$OS" == "macos" ]]; then
   mkdir -p "$GHOSTTY_DIR"
   backup "$GHOSTTY_DIR/config.ghostty"
   cp "$REPO_DIR/configs/ghostty/config.ghostty" "$GHOSTTY_DIR/config.ghostty"
+fi
+
+# 6a2. kitty config
+log "Copying kitty config"
+mkdir -p "$HOME/.config/kitty"
+backup "$HOME/.config/kitty/kitty.conf"
+cp "$REPO_DIR/configs/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
+
+# 6a3. herdr client config + Claude integration (only when herdr is installed).
+# Copies config.toml only: ~/.config/herdr also holds live sockets and session state.
+if command -v herdr >/dev/null 2>&1; then
+  log "Copying herdr config and wiring it into Claude Code"
+  mkdir -p "$HOME/.config/herdr"
+  backup "$HOME/.config/herdr/config.toml"
+  cp "$REPO_DIR/configs/herdr/config.toml" "$HOME/.config/herdr/config.toml"
+  herdr integration install claude || warn "herdr Claude integration failed; run: herdr integration install claude"
+  mkdir -p "$HOME/.claude/skills/herdr"
+  herdr --skill > "$HOME/.claude/skills/herdr/SKILL.md" || warn "Could not write the herdr skill"
 fi
 
 # 6b. Codex config

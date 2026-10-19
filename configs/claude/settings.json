@@ -1,8 +1,24 @@
 {
-  "includeCoAuthoredBy": false,
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
+  "worktree": {
+    "baseRef": "fresh"
+  },
+  "enableArtifact": false,
+  "feedbackDrafts": "off",
+  "fastMode": true,
+  "awaySummaryEnabled": false,
+  "dialogExpiry": "never",
+  "tui": "fullscreen",
+  "theme": "custom:catppuccin-mocha",
+  "editorMode": "normal",
+  "switchModelsOnFlag": false,
+  "autoContinueAtUsageLimit": false,
+  "terminalProgressBarEnabled": false,
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true,
     "github@claude-plugins-official": true,
@@ -11,24 +27,32 @@
   "alwaysThinkingEnabled": false,
   "effortLevel": "medium",
   "promptSuggestionEnabled": false,
-  "awaySummaryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
-  "theme": "custom:catppuccin-mocha",
   "showTurnDuration": false,
-  "terminalProgressBarEnabled": false,
   "teammateMode": "auto",
-  "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "voice": {
     "enabled": true,
     "mode": "tap"
   },
-  "tui": "fullscreen",
   "outputStyle": "Concise",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh",
-    "padding": 0
+    "padding": 0,
+    "refreshInterval": 5
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "subagentStatusLine": {
+    "type": "command",
+    "command": "~/.claude/subagent-statusline.sh"
+  },
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
+    "CLAUDE_CODE_SUBAGENT_MODEL_FORCE": "1"
   }
 }
