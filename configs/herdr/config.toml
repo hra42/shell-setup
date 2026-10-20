@@ -1,0 +1,43 @@
+# Herdr CLIENT config for the MacBook.
+# Place at ~/.config/herdr/config.toml on the Mac.
+# These are the client-local settings: theme, sidebar/UI presentation and
+# keybindings all come from the client, not the remote server.
+# Server-side settings ([worktrees], [terminal], [session], [server],
+# integrations) deliberately live on the ai host, not here.
+#
+# After editing: use the UI's "reload config" action (it reloads client-local
+# settings and the selected server's config), or run `herdr server reload-config`
+# on this machine to reload its server config.
+
+onboarding = false
+
+[theme]
+name = "terminal"
+
+[ui]
+status_indicators = "symbols"
+sidebar_width = 32
+agent_panel_sort = "priority"
+show_agent_labels_on_pane_borders = true
+window_title = "{hostname}: {workspace}"
+
+# Left unset on purpose: the default layout includes the `machine` token, which
+# you want with Local + the ai server both present.
+# [ui.sidebar.agents]
+# rows = [["state_icon", "machine", "workspace", "tab"], ["agent"]]
+# [ui.sidebar.spaces]
+# rows = [["state_icon", "workspace"], ["branch", "git_status"]]
+
+[ui.toast]
+delivery = "terminal"
+delay_seconds = 1
+
+# Custom command keybindings are client-local, but the command string runs on
+# the remote server in the focused pane's working directory.
+[[keys.command]]
+key = "prefix+alt+g"
+type = "popup"
+command = "git status --short; printf '\nPress Enter to close'; read answer"
+description = "git status"
+width = "80%"
+height = "70%"

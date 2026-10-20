@@ -22,7 +22,9 @@ Reproducible shell environment for **macOS and Debian/Ubuntu Linux**. Captures t
     ├── opencode/    # tui.json + themes/catppuccin-mocha-blue.json (transparent bg)
     ├── zed/
     ├── ai/
-    ├── claude/      # settings.json (no tokens), statusline.sh, output-styles/ (Concise), agents/ (29 subagents: quality/review, language specialists, infra/devops, data/AI, docs, and specialized domains)
+    ├── claude/      # settings.json (no tokens; subagents forced to Sonnet, no attribution/session links), statusline.sh + subagent-statusline.sh, themes/ (Catppuccin Mocha), output-styles/ (Concise), agents/ (29 subagents: quality/review, language specialists, infra/devops, data/AI, docs, and specialized domains)
+    ├── kitty/       # kitty.conf (Catppuccin Mocha, Monaspace, Option+arrow word jumps)
+    ├── herdr/       # config.toml (client config; copied only if herdr is installed, which also installs herdr's Claude hook + skill)
     ├── codex/       # config.toml
     └── ghostty/     # config.ghostty (deployed to ~/Library/Application Support/com.mitchellh.ghostty/)
 ```
